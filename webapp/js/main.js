@@ -12,17 +12,18 @@ var words = [],
     phrase = '',
     entryShown = false,
     getWord = function(phrase, words) {
-        if (words.length < wordsPerPhrase) {
-            setStatus('Add a word');
-            return '';
-        }
+        if (words.length === 0) return '';
         var word = phrase;
         while (phrase.match(RegExp(word, 'g'))) {
-            word = words[Math.floor((Math.random()*(words.length-1)))];
+            word = words[Math.floor((Math.random()*(words.length)))];
         }
         return word +' ';
     },
     getPhrase = function(words) {
+        if (words.length < wordsPerPhrase) {
+            setStatus('Add a word');
+            return '';
+        }
         var phrase = '';
         for (var i=0; i<wordsPerPhrase; i++) {
             phrase = phrase + getWord(phrase, words);
