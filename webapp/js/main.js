@@ -11,17 +11,21 @@ var words = [],
     phraseRefresh = 4000,
     phrase = '',
     entryShown = false,
-    getWord = function(phrase) {
+    getWord = function(phrase, words) {
+        if (words.length < wordsPerPhrase) {
+            setStatus('Add a word');
+            return '';
+        }
         var word = phrase;
         while (phrase.match(RegExp(word, 'g'))) {
             word = words[Math.floor((Math.random()*(words.length-1)))];
         }
         return word +' ';
     },
-    getPhrase = function() {
+    getPhrase = function(words) {
         var phrase = '';
         for (var i=0; i<wordsPerPhrase; i++) {
-            phrase = phrase + getWord(phrase);
+            phrase = phrase + getWord(phrase, words);
         }
         return phrase;
     },
@@ -31,9 +35,10 @@ var words = [],
             setInterval(function() { $('#status').fadeOut(); }, 3000);
         });
     },
-    setPhrase = function() {
+    setPhrase = function(phrase) {
+        if (typeof(phrase) === 'undefined') phrase = getPhrase(words);
         $('h1').fadeOut(function() {
-            $(this).text(getPhrase()).fadeIn();
+            $(this).text(phrase).fadeIn();
        });
     },
     parseKey = function(e) {
@@ -56,6 +61,13 @@ var words = [],
                     words = kickstart
                     console.log('Loading test words');
                     break;
+                case ':more':
+                    wordsPerPhrase++
+                    setStatus('Now showing a '+ wordsPerPhrase +' word phrase');
+                    break;
+                case ':less':
+                    wordsPerPhrase--
+                    setStatus('Now showing a '+ wordsPerPhrase +' word phrase');
                 case ':words':
                     console.log('Show words');
                     break;
@@ -70,7 +82,7 @@ var words = [],
             $('#entry input').val('');
             entryShown = false;
         }
-        e.preventDefault();
+        e.preventDefault(); // one way to stop space from scrolling the view port
     },
     permutation = function(n, r) {
         if (n<0 || r<0 || r>n) return 0;
