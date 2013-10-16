@@ -10,6 +10,7 @@ var words = [],
     wordsPerPhrase = 3,
     phraseRefresh = 4000,
     phrase = '',
+    entryShown = false,
     getWord = function(phrase) {
         var word = phrase;
         while (phrase.match(RegExp(word, 'g'))) {
@@ -29,6 +30,38 @@ var words = [],
             $(this).text(getPhrase()).fadeIn();
        });
     },
+    parseKey = function(e) {
+        console.log(e.which);
+        if (!entryShown) {
+            $('#entry').show();
+            $('#entry input').val(String.fromCharCode(e.which)).focus();
+            entryShown = true;
+        }
+        if (entryShown && (e.which == 13 || e.which == 27)) {
+            var entry = $('#entry input').val();
+            switch(entry) {
+                case 'ºclear':
+                    words = [];
+                    console.log('Clearing words');
+                    break;
+                case 'ºkickstart':
+                    words = kickstart
+                    console.log('Loading test words');
+                    break;
+                case 'ºwords':
+                    console.log('Show words');
+                    break;
+                default:
+                    words.push(entry);
+                    console.log('Added '+ entry);
+                    console.dir(words);
+            }
+            $('#entry').hide();
+            $('#entry input').val('');
+            entryShown = false;
+        }
+        e.preventDefault();
+    },
     permutation = function(n, r) {
         if (n<0 || r<0 || r>n) return 0;
         var p = 1; for ( var i=n; i>(n-r); i--) { p=p*i; }
@@ -40,6 +73,9 @@ $(function() {
     console.log('Imported '+ words.length +' words');
     var perms = permutation(words.length, wordsPerPhrase);
     console.log('The provides '+ perms +' permutations of a '+ wordsPerPhrase +' word phrase');
+
+    $(document).keyup(parseKey);
+
     setPhrase();
     setInterval(function() { setPhrase(); }, phraseRefresh);
 });
