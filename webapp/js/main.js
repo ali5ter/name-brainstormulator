@@ -25,6 +25,12 @@ var words = [],
         }
         return phrase;
     },
+    setStatus = function(message) {
+        $('#status').fadeIn(function() {
+            $(this).text(message);
+            setInterval(function() { $('#status').fadeOut(); }, 3000);
+        });
+    },
     setPhrase = function() {
         $('h1').fadeOut(function() {
             $(this).text(getPhrase()).fadeIn();
@@ -34,27 +40,31 @@ var words = [],
         console.log(e.which);
         if (!entryShown) {
             $('#entry').show();
-            $('#entry input').val(String.fromCharCode(e.which)).focus();
+            // TODO: Attempt to show trigger char?
+            //$('#entry input').val(String.fromCharCode(e.which)).focus();
+            $('#entry input').focus();
             entryShown = true;
         }
         if (entryShown && (e.which == 13 || e.which == 27)) {
             var entry = $('#entry input').val();
             switch(entry) {
-                case 'ºclear':
+                case ':clear':
                     words = [];
                     console.log('Clearing words');
                     break;
-                case 'ºkickstart':
+                case ':kickstart':
                     words = kickstart
                     console.log('Loading test words');
                     break;
-                case 'ºwords':
+                case ':words':
                     console.log('Show words');
                     break;
                 default:
-                    words.push(entry);
-                    console.log('Added '+ entry);
-                    console.dir(words);
+                    if (entry != '') {
+                        words.push(entry);
+                        setStatus('Added '+ entry);
+                        // TODO: Update localStorage
+                    }
             }
             $('#entry').hide();
             $('#entry input').val('');
@@ -69,13 +79,15 @@ var words = [],
     };
 
 $(function() {
+    // TODO: Replace kickstart with import from localStorage
     words = kickstart;
     console.log('Imported '+ words.length +' words');
     var perms = permutation(words.length, wordsPerPhrase);
-    console.log('The provides '+ perms +' permutations of a '+ wordsPerPhrase +' word phrase');
+    console.log('This provides '+ perms +' permutations of a '+ wordsPerPhrase +' word phrase');
 
     $(document).keyup(parseKey);
 
+    // TODO: Make setTimeout to control timer
     setPhrase();
     setInterval(function() { setPhrase(); }, phraseRefresh);
 });
