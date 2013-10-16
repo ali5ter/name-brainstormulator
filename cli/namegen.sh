@@ -6,6 +6,9 @@ NUM_WORDS=0
 PHRASE=''
 WORDS_IN_PHRASE=3
 
+# dump words into js array format...
+# cat words.txt | sed -E "s/^(.+)$/'\1'/" | tr '\n' ','
+
 function importWords {
     local i=0
     while read word ; do
@@ -38,10 +41,10 @@ function permutation {
 
 importWords && (
     echo "Imported $NUM_WORDS words"
-    COMBINATIONS=$(permutation $NUM_WORDS $WORDS_IN_PHRASE)
-    echo "That provides $COMBINATIONS combinations of a $WORDS_IN_PHRASE word phrase"
+    PERMS=$(permutation $NUM_WORDS $WORDS_IN_PHRASE)
+    echo "That provides $PERMS permutations of a $WORDS_IN_PHRASE word phrase"
     echo -e "Like this...\n"
-    for combinations in $(seq $COMBINATIONS); do
+    for perms in $(seq $PERMS); do
         for words in $(seq $WORDS_IN_PHRASE); do
             PHRASE=$PHRASE$(getWord "$PHRASE")
         done

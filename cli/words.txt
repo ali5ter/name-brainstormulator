@@ -32,7 +32,7 @@ Delegation
 Sleuth
 Dashboard
 Consult
-Colsuting
+Consulting
 Assistant
 Assit
 Curator
