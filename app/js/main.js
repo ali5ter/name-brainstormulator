@@ -100,6 +100,7 @@ var words = [],
                 case ':less':
                     wordsPerPhrase--;
                     setStatus('Now showing a '+ wordsPerPhrase +' word phrase');
+                    break;
                 case ':words':
                     $('#words').show();
                     $('#words').empty();
