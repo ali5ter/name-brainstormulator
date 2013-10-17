@@ -58,6 +58,14 @@ var words = [],
             rule_color: '#2A2A2A',
         });
     },
+    removeWord = function(oWord) {
+        var i= $.inArray(oWord.text(), words);
+        if (i >= 0) {
+            words.splice(i, 1);
+            oWord.remove();
+            console.log('Removed '+ oWord.text());
+        }
+    },
     parseKey = function(e) {
         console.log(e.which);
         if (!entryShown) {
@@ -102,6 +110,7 @@ var words = [],
                     break;
                 default:
                     entry = $.trim(entry);
+                    // TODO: Check for duplicates
                     if (entry != '') {
                         words.push(entry);
                         setStatus('Added '+ entry);
@@ -136,6 +145,7 @@ $(function() {
     console.log('This provides '+ perms +' permutations of a '+ wordsPerPhrase +' word phrase');
 
     $(document).keyup(parseKey);
+    $('#words').delegate('p', 'click', function() { removeWord($(this)); });
 
     setPhrase();
     startPhrase();
