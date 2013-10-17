@@ -32,7 +32,7 @@ var words = [],
     // Return a phrase of a specified number of words
     getPhrase = function(words, wordsPerPhrase) {
         if (words.length < wordsPerPhrase) {
-            setStatus('Add a word', false);
+            setStatus('Add a word');
             return '';
         }
         var phrase = '';
@@ -46,9 +46,7 @@ var words = [],
     setPhrase = function(phrase) {
         if (typeof(phrase) === 'undefined') phrase = getPhrase(words, wordsPerPhrase);
         console.log('set phrase to '+ phrase);
-        $('#phrase').fadeOut(function() {
-            $(this).text(phrase).fadeIn();
-       });
+        $('#phrase').fadeOut(function() { $(this).text(phrase).fadeIn(); });
     },
 
     // Start the phrase display timer
