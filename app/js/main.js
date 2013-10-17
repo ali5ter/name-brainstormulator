@@ -12,7 +12,7 @@ var words = [],
     'Consulting','Assistant','Assit','Curator','List','Observer','Watchlist',
     'Lifelist','Pokedex','Lite','Focused','Control'],
     wordsPerPhrase = 3,
-    phraseRefresh = 4000,
+    phraseDelay = 4000,
     phrase = '',
     phraseTimer = null,
     entryShown = false,
@@ -54,7 +54,7 @@ var words = [],
     // Start the phrase display timer
     startPhrase = function() {
         console.log('Start phrase timer');
-        phraseTimer = setInterval(function() { setPhrase(); }, phraseRefresh);
+        phraseTimer = setInterval(function() { setPhrase(); }, phraseDelay);
     },
 
     // Stop the phrase display timer
@@ -129,6 +129,7 @@ var words = [],
 
     // Parse the entry field content
     parseEntry = function (entry) {
+        entry = $.trim(entry);
         switch(entry) {
             case ':clear':      // clear the words array
                 words = [];
@@ -140,12 +141,34 @@ var words = [],
                 console.log('Loaded test words');
                 break;
             case ':more':       // increase word length of the phrase
-                wordsPerPhrase++;
-                setStatus('Now showing a '+ wordsPerPhrase +' word phrase');
+                if (wordsPerPhrase < 8 ) {
+                    wordsPerPhrase++;
+                    setStatus('Now showing a '+ wordsPerPhrase +' word phrase');
+                } else { setStatus("That's large enough"); }
                 break;
             case ':less':       // decrease word length of the phrase
-                wordsPerPhrase--;
-                setStatus('Now showing a '+ wordsPerPhrase +' word phrase');
+                if (wordsPerPhrase > 1 ) {
+                    wordsPerPhrase--;
+                    setStatus('Now showing a '+ wordsPerPhrase +' word phrase');
+                } else { setStatus("That's small enough"); }
+                break;
+            case ':faster':     // increse phrase timer delay
+                if (phraseDelay > 1000) {
+                    stopPhrase();
+                    phraseDelay = phraseDelay - 1000;
+                    startPhrase();
+                    console.log('Updated phrase timer delay to '+ phraseDelay);
+                    setStatus('Showing each phrase a little faster');
+                } else { setStatus("That's fast enough"); }
+                break;
+            case ':slower':     // decrease phrase timer delay
+                if (phraseDelay < 15000) {
+                    stopPhrase();
+                    phraseDelay = phraseDelay + 1000;
+                    startPhrase();
+                    console.log('Updated phrase timer delay to '+ phraseDelay);
+                    setStatus('Showing each phrase a little slower');
+                } else { setStatus("That's slow enough"); }
                 break;
             case ':words':      // show word list
                 stopPhrase();
@@ -156,9 +179,7 @@ var words = [],
                 wordsShown = true;
                 break;
             default:            // add content as a word to the word array
-                entry = $.trim(entry);
-                // TODO: Check for duplicates
-                if (entry != '') {
+                if (entry != '' && $.inArray(entry, words) === -1) {
                     words.push(entry);
                     setStatus('Added '+ entry);
                     // TODO: Update localStorage
