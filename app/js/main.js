@@ -10,7 +10,9 @@ var words = [],
     wordsPerPhrase = 3,
     phraseRefresh = 4000,
     phrase = '',
+    phraseTimer = null,
     entryShown = false,
+    wordsShown = false,
     getWord = function(phrase, words) {
         if (words.length === 0) return '';
         var word = phrase;
@@ -21,7 +23,7 @@ var words = [],
     },
     getPhrase = function(words) {
         if (words.length < wordsPerPhrase) {
-            setStatus('Add a word');
+            setStatus('Add a word', false);
             return '';
         }
         var phrase = '';
@@ -30,17 +32,31 @@ var words = [],
         }
         return phrase;
     },
-    setStatus = function(message) {
+    setStatus = function(message, fadeOut) {
+        if (typeof(fadeOut) === 'undefined') fadeOut = true;
         $('#status').fadeIn(function() {
             $(this).text(message);
-            setInterval(function() { $('#status').fadeOut(); }, 3000);
+            if (fadeOut) setInterval(function() { $('#status').fadeOut(); }, 4000);
         });
     },
     setPhrase = function(phrase) {
         if (typeof(phrase) === 'undefined') phrase = getPhrase(words);
-        $('h1').fadeOut(function() {
+        console.log('set phrase to '+ phrase);
+        $('#phrase').fadeOut(function() {
             $(this).text(phrase).fadeIn();
        });
+    },
+    appendWord = function(word) {
+        $('#words').append('<p><i class="icon-remove-sign pull-left icon-muted"></i>'+ word +'</p>');
+    },
+    showWords = function(words) {
+        for (var i=0;i<words.length;i++) { appendWord(words[i]); }
+        $('#words').column({
+            count: 5,
+            rule_style: 'solid',
+            rule_width: 'thin',
+            rule_color: '#2A2A2A',
+        });
     },
     parseKey = function(e) {
         console.log(e.which);
@@ -51,30 +67,44 @@ var words = [],
             $('#entry input').focus();
             entryShown = true;
         }
-        if (entryShown && (e.which == 13 || e.which == 27)) {
+        if (wordsShown && e.which === 27) {
+            $('#words').hide();
+            $('#phrase').show();
+            startPhrase();
+            wordsShown = false;
+        }
+        if (entryShown && (e.which === 13 || e.which === 27)) {
             var entry = $('#entry input').val();
             switch(entry) {
                 case ':clear':
                     words = [];
-                    console.log('Clearing words');
+                    $('#words').empty();
+                    console.log('Cleared all words');
                     break;
                 case ':kickstart':
-                    words = kickstart
-                    console.log('Loading test words');
+                    words = kickstart;
+                    $('#words').empty();
+                    showWords(words);
+                    console.log('Loaded test words');
                     break;
                 case ':more':
-                    wordsPerPhrase++
+                    wordsPerPhrase++;
                     setStatus('Now showing a '+ wordsPerPhrase +' word phrase');
                     break;
                 case ':less':
-                    wordsPerPhrase--
+                    wordsPerPhrase--;
                     setStatus('Now showing a '+ wordsPerPhrase +' word phrase');
                 case ':words':
-                    console.log('Show words');
+                    $('#words').show();
+                    $('#phrase').hide();
+                    stopPhrase();
+                    wordsShown = true;
                     break;
                 default:
+                    entry = $.trim(entry);
                     if (entry != '') {
                         words.push(entry);
+                        appendWord(entry);
                         setStatus('Added '+ entry);
                         // TODO: Update localStorage
                     }
@@ -85,6 +115,14 @@ var words = [],
         }
         e.preventDefault(); // one way to stop space from scrolling the view port
     },
+    startPhrase = function() {
+        console.log('Start phrase timer');
+        phraseTimer = setInterval(function() { setPhrase(); }, phraseRefresh);
+    },
+    stopPhrase = function() {
+        console.log('Stop phrase timer');
+        clearInterval(phraseTimer);
+    },
     permutation = function(n, r) {
         if (n<0 || r<0 || r>n) return 0;
         var p = 1; for ( var i=n; i>(n-r); i--) { p=p*i; }
@@ -94,14 +132,14 @@ var words = [],
 $(function() {
     // TODO: Replace kickstart with import from localStorage
     words = kickstart;
+    showWords(words);
     console.log('Imported '+ words.length +' words');
     var perms = permutation(words.length, wordsPerPhrase);
     console.log('This provides '+ perms +' permutations of a '+ wordsPerPhrase +' word phrase');
 
     $(document).keyup(parseKey);
 
-    // TODO: Make setTimeout to control timer
     setPhrase();
-    setInterval(function() { setPhrase(); }, phraseRefresh);
+    startPhrase();
 });
 

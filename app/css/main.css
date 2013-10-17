@@ -113,7 +113,7 @@ body { background-color: #262626; color: #646464; }
     margin-right: auto;
 }
 
-h1 {
+#phrase {
     background-color: #363636;
     color: #848484;
     padding: 1em;
@@ -123,10 +123,7 @@ h1 {
     line-height: 1em;
 }
 
-#entry {
-    display: none;
-    z-index: 1000;
-}
+#entry, #words { display: none; }
 
 #entry input:focus { outline: none; }
 
@@ -139,8 +136,23 @@ h1 {
     font-family: Economica;
 }
 
+#words {
+    position: absolute;
+    top: 0;
+    width: 62%;
+    background-color: #363636;
+    color: #848484;
+    padding: 1em;
+}
 
+#words p {
+    margin: 0;
+    font-size: 1em;
+    line-height: 1.6em;
+}
 
+.icon-muted { color: #848484; }
+.icon-muted:hover { color: #eee; cursor: pointer; }
 
 /* ==========================================================================
    Helper classes
