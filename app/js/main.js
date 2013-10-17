@@ -83,8 +83,6 @@ var words = [],
                     break;
                 case ':kickstart':
                     words = kickstart;
-                    $('#words').empty();
-                    showWords(words);
                     console.log('Loaded test words');
                     break;
                 case ':more':
@@ -96,6 +94,8 @@ var words = [],
                     setStatus('Now showing a '+ wordsPerPhrase +' word phrase');
                 case ':words':
                     $('#words').show();
+                    $('#words').empty();
+                    showWords(words);
                     $('#phrase').hide();
                     stopPhrase();
                     wordsShown = true;
@@ -104,7 +104,6 @@ var words = [],
                     entry = $.trim(entry);
                     if (entry != '') {
                         words.push(entry);
-                        appendWord(entry);
                         setStatus('Added '+ entry);
                         // TODO: Update localStorage
                     }
@@ -132,7 +131,6 @@ var words = [],
 $(function() {
     // TODO: Replace kickstart with import from localStorage
     words = kickstart;
-    showWords(words);
     console.log('Imported '+ words.length +' words');
     var perms = permutation(words.length, wordsPerPhrase);
     console.log('This provides '+ perms +' permutations of a '+ wordsPerPhrase +' word phrase');
