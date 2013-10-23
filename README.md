@@ -15,12 +15,12 @@ If you are at all interested: Just clone and crank up <pre>python -m SimpleHTTPS
 Usage
 -----
 
-Just hit a key to show the input field, then enter a word. That word is added to the stored list of words.
+Press a key to show the input field, then enter a word. That word is added to the stored list of words. Escape will cancel the opertion.
 
 The default number of words in a phrase that is flashed up is 3 but you can change that.
 
 There are some commands too:
-* **:words** ....... displays all the words so you can view them all at once and delete the ones you don't like
+* **:words** ....... displays all the words so you can view them all at once and delete the ones you don't like. Escape to exit.
 * **:clear** ....... removes all words and starts from scratch again. You should see a prompt to add a word after entering this.
 * **:kickstart** ... populates the app with a bunch of words to get you going
 * **:more** ........ increases the word length of the phrase
