@@ -1,7 +1,7 @@
 Name Brainstormulator
 =====================
 
-After brainstorming on a product name with [Robert](www.linkedin.com/pub/robert-sullivan/0/21/3a2) and [Brian](www.linkedin.com/in/brianpartridge/), this toy was born. Nothing fancy. Very cheap. Just enter some words and watch them flash up in different sequences.
+After brainstorming on a product name with [Robert](http://www.linkedin.com/pub/robert-sullivan/0/21/3a2) and @brianpartridge, this toy was born. Nothing fancy. Very cheap. Just enter some words and watch them flash up in different sequences.
 
 <img src="https://github.com/ali5ter/name-brainstormulator/blob/master/app/images/screenshots/brainstormulator-00.png?raw=true" width="32%"/>&nbsp;
 <img src="https://github.com/ali5ter/name-brainstormulator/blob/master/app/images/screenshots/brainstormulator-01.png?raw=true" width="32%"/>&nbsp;
