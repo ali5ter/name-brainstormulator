@@ -4,13 +4,19 @@
  */
 
 var words = [],
-    kickstart = ['Beacon','Insight','Monitor','Mobile','Case','View','Scope',
-    'Minder','Monocle','Nanny','Handheld','vCenter','VSphere','Alert','Touch',
-    'Analysis','Pocket','Assist','On-call','VM','Remote','Management',
-    'Collector','Inspector','Investigate','Delegation','Check-in','Bookmarks',
-    'KB','Investigate','Delegation','Sleuth','Dashboard','Consult',
-    'Consulting','Assistant','Assit','Curator','List','Observer','Watchlist',
-    'Lifelist','Pokedex','Lite','Focused','Control'],
+    kickstart = ['bamboozled','bazinga','bevy','bifurcate','bilirubin',
+    'bobolink','buccaneer','bulgur','bumfuzzle','canoodle','cantankerous',
+    'carbuncle','caterwaul','cattywampus','cheeky','conniption','coot',
+    'didgeridoo','dingy','doodle','doohickey','eschew','fiddledeedee',
+    'finagle','flanker','floozy','fungible','girdle','gobsmacked','grog',
+    'gumption','gunky','hitherto','hoi polloi','hornswoggle','hullabaloo',
+    'indubitably','janky','kahuna','katydid','kerplunk','kinkajou','knickers',
+    'lackadaisical','loopy','manscape','monkey','mugwump','namby-pamby',
+    'noggin','pantaloons','passel','persnickety','popinjay','prestidigitation',
+    'proctor','rapscallion','rookery','rumpus','scootch','scuttlebutt',
+    'shebang','Shih Tzu','smegma','snarky','snuffle','spelunker','spork',
+    'sprocket','squeegee','succubus','tater','tuber','tuchis','viper','waddle',
+    'walkabout','wasabi','weasel','wenis','whatnot','wombat','wonky','zeitgeist'],
     wordsPerPhrase = 3,
     phraseDelay = 4000,
     phrase = '',
@@ -115,9 +121,15 @@ var words = [],
             startPhrase();
             wordsShown = false;
         }
-        // Parse the entry field content if Enter or ESC pressed, then close it
-        if (entryShown && (e.which === 13 || e.which === 27)) {
+        // Parse the entry field content if Enter pressed, then close it
+        if (entryShown && e.which === 13) {
             parseEntry($('#entry input').val());
+            $('#entry').hide();
+            $('#entry input').val('');
+            entryShown = false;
+        }
+        // Close entry field if ESC pressed
+        if (entryShown && e.which === 27) {
             $('#entry').hide();
             $('#entry input').val('');
             entryShown = false;
