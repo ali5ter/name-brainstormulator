@@ -1,4 +1,6 @@
 #!/bin/bash
+# ★  Display all permutations of an 'n' word phrase from a list of 'm' words.
+# @author Alister Lewis-Bowen <alister@different.com>
 
 BASE=$(dirname $0)
 WORDS=''
