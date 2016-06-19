@@ -3,9 +3,9 @@ Name Brainstormulator
 
 After brainstorming on a product name with [Robert](http://www.linkedin.com/pub/robert-sullivan/0/21/3a2) and @brianpartridge, this toy was born. Nothing fancy. Very cheap. Just enter some words and watch them flash up in different sequences.
 
-<img src="http://gitlab.different.com/alister/name-brainstormulator/raw/master/app/images/screenshots/brainstormulator-00.png" width="32%"/>&nbsp;
-<img src="http://gitlab.different.com/alister/name-brainstormulator/raw/master/app/images/screenshots/brainstormulator-01.png" width="32%"/>&nbsp;
-<img src="http://gitlab.different.com/alister/name-brainstormulator/raw/master/app/images/screenshots/brainstormulator-02.png" width="32%"/>&nbsp;
+<img src="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/app/images/screenshots/brainstormulator-00.png" width="32%"/>&nbsp;
+<img src="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/app/images/screenshots/brainstormulator-01.png" width="32%"/>&nbsp;
+<img src="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/app/images/screenshots/brainstormulator-02.png" width="32%"/>&nbsp;
 
 Installation
 ------------
