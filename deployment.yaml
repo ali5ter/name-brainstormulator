@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: name-brainstormulator
+  labels:
+    app: name-brainstormulator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: name-brainstormulator
+  template:
+    metadata:
+      labels:
+        app: name-brainstormulator
+    spec:
+      containers:
+      - name: name-brainstormulator
+        image: ali5ter/name-brainstormulator:1.0
+        ports:
+        - containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: name-brainstormulator
+spec:
+  selector:
+    app: name-brainstormulator
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080

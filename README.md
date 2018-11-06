@@ -3,14 +3,16 @@ Name Brainstormulator
 
 After brainstorming on a product name with [Robert](http://www.linkedin.com/pub/robert-sullivan/0/21/3a2) and @brianpartridge, this toy was born. Nothing fancy. Very cheap. Just enter some words and watch them flash up in different sequences.
 
+Currently using as a simple test app for k8s deployments.
+
 <img src="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/app/images/screenshots/brainstormulator-00.png" width="32%"/>&nbsp;
 <img src="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/app/images/screenshots/brainstormulator-01.png" width="32%"/>&nbsp;
 <img src="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/app/images/screenshots/brainstormulator-02.png" width="32%"/>&nbsp;
 
-Installation
-------------
+Running
+-------
 
-If you are at all interested: Just clone and crank up <pre>python -m SimpleHTTPServer</pre> in the `app` directory.
+Clone this repo and start <pre>python -m SimpleHTTPServer</pre> in the `app` directory.
 
 Usage
 -----
@@ -28,7 +30,15 @@ There are some commands too:
 * **:faster** ...... increases speed at which phrases are flashed up
 * **:slower** ...... drecreses speed at which phrases are flashed up
 
-Comments
---------
+K8s deployment
+--------------
 
-Again, if you at all inerested: I'd welcome suggestions, advice and comments about coding style, visual and interaction design. Thanks!
+Clone this repo, then inside it do the following:
+1. Build the docker image: <pre>docker build -t ali5ter/name-brainstormulator:1.0 .</pre>
+2. Optionally push the image: <pre>docker push ali5ter/name-brainstormulator:1.0</pre>
+3. Deploy on K8s: <pre>kubectl apply -f deployment.yaml</pre>
+4. Play with it
+5. Remove the deployment: <pre>kubectl delete deployment.apps/name-brainstormulator service/name-brainstormulator</pre>
+
+You can also run the docker image locally, if you don't have a K8s cluster handy:
+<pre>docker run -p80:8080 ali5ter/name-brainstormulator:1.0</pre>
