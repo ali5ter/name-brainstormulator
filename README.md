@@ -9,17 +9,17 @@ A very simple web app to flash up words in different sequences. Used as a simple
 Running
 -------
 After cloning this repo, you can run locally as a container like this:
-1. Build the docker image: <pre>docker build -t ali5ter/name-brainstormulator:1.0 .</pre>
-2. Run the container: <pre>docker run -d -p80:8080 ali5ter/name-brainstormulator:1.0</pre>
+1. Build the docker image: <pre>docker build -t ali5ter/name-brainstormulator:1.1 .</pre>
+2. Run the container: <pre>docker run -d -p80:8080 ali5ter/name-brainstormulator:1.1</pre>
 3. Open http://localhost/ and play with the app
 4. Stop and remove the container: <pre>docker rm -f $(docker ps | grep name-brainstormulator | awk '{print $1}')</pre>
 
 Deploy this on Kubernetes like this:
-1. Build the docker image: <pre>docker build -t ali5ter/name-brainstormulator:1.0 .</pre>
-2. Push the image to an accessible image registry : <pre>docker push ali5ter/name-brainstormulator:1.0</pre>
+1. Build the docker image: <pre>docker build -t ali5ter/name-brainstormulator:1.1 .</pre>
+2. Push the image to an accessible image registry : <pre>docker push ali5ter/name-brainstormulator:1.1</pre>
 3. Deploy on K8s: <pre>kubectl apply -f deployment.yaml</pre>
 4. Open the external address presented by K8s and play with the app
-5. Remove the deployment: <pre>kubectl delete deployment.apps/name-brainstormulator service/name-brainstormulator</pre>
+5. Remove the deployment: <pre>kubectl delete deployment/name-brainstormulator service/name-brainstormulator</pre>
 
 Usage
 -----

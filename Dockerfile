@@ -1,6 +1,4 @@
-FROM python:3.6-alpine
-WORKDIR /app
-ADD /app /app
+FROM nginx:latest
 
-EXPOSE 80
-CMD cd /app && python -m http.server 8080
+ADD /nginx.conf /etc/nginx/conf.d/default.conf
+ADD /app /usr/share/nginx/html
