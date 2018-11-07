@@ -1,9 +1,6 @@
 Name Brainstormulator
 =====================
-
-After brainstorming on a product name with [Robert](http://www.linkedin.com/pub/robert-sullivan/0/21/3a2) and @brianpartridge, this toy was born. Nothing fancy. Very cheap. Just enter some words and watch them flash up in different sequences.
-
-Currently using as a simple test app for k8s deployments.
+A very simple web app to flash up words in different sequences. Used as a simple test app for container and kubernetes deployment.
 
 <img src="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/app/images/screenshots/brainstormulator-00.png" width="32%"/>&nbsp;
 <img src="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/app/images/screenshots/brainstormulator-01.png" width="32%"/>&nbsp;
@@ -11,12 +8,21 @@ Currently using as a simple test app for k8s deployments.
 
 Running
 -------
+After cloning this repo, you can run locally as a container like this:
+1. Build the docker image: <pre>docker build -t ali5ter/name-brainstormulator:1.0 .</pre>
+2. Run the container: <pre>docker run -d -p80:8080 ali5ter/name-brainstormulator:1.0</pre>
+3. Open http://localhost/ and play with the app
+4. Stop and remove the container: <pre>docker rm -f $(docker ps | grep name-brainstormulator | awk '{print $1}')</pre>
 
-Clone this repo and start <pre>python -m SimpleHTTPServer</pre> in the `app` directory.
+Deploy this on Kubernetes like this:
+1. Build the docker image: <pre>docker build -t ali5ter/name-brainstormulator:1.0 .</pre>
+2. Push the image to an accessible image registry : <pre>docker push ali5ter/name-brainstormulator:1.0</pre>
+3. Deploy on K8s: <pre>kubectl apply -f deployment.yaml</pre>
+4. Open the external address presented by K8s and play with the app
+5. Remove the deployment: <pre>kubectl delete deployment.apps/name-brainstormulator service/name-brainstormulator</pre>
 
 Usage
 -----
-
 Press a key to show the input field, then enter a word. That word is added to the stored list of words. Escape will cancel the opertion.
 
 The default number of words in a phrase that is flashed up is 3 but you can change that.
@@ -29,16 +35,3 @@ There are some commands too:
 * **:less** ........ decreases the word length of the phrase
 * **:faster** ...... increases speed at which phrases are flashed up
 * **:slower** ...... drecreses speed at which phrases are flashed up
-
-K8s deployment
---------------
-
-Clone this repo, then inside it do the following:
-1. Build the docker image: <pre>docker build -t ali5ter/name-brainstormulator:1.0 .</pre>
-2. Optionally push the image: <pre>docker push ali5ter/name-brainstormulator:1.0</pre>
-3. Deploy on K8s: <pre>kubectl apply -f deployment.yaml</pre>
-4. Play with it
-5. Remove the deployment: <pre>kubectl delete deployment.apps/name-brainstormulator service/name-brainstormulator</pre>
-
-You can also run the docker image locally, if you don't have a K8s cluster handy:
-<pre>docker run -p80:8080 ali5ter/name-brainstormulator:1.0</pre>
