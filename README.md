@@ -19,7 +19,8 @@ Deploy this on Kubernetes like this:
 2. Push the image to an accessible image registry : <pre>docker push ali5ter/name-brainstormulator:1.1</pre>
 3. Deploy on K8s: <pre>kubectl apply -f deployment.yaml</pre>
 4. Open the external address presented by K8s and play with the app
-5. Remove the deployment: <pre>kubectl delete deployment/name-brainstormulator service/name-brainstormulator</pre>
+5. Play with scaling the deployment: <pre>kubectl scale deployments/name-brainstormulator --replicas=110</pre>
+6. Remove the deployment: <pre>kubectl delete deployment/name-brainstormulator service/name-brainstormulator</pre>
 
 Usage
 -----
