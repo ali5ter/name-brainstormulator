@@ -1,11 +1,19 @@
-apiVersion: apps/v1
-kind: Deployment
+kind: Namespace
+apiVersion: v1
 metadata:
   name: name-brainstormulator
   labels:
+    name: name-brainstormulator
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: name-brainstormulator
+  namespace: name-brainstormulator
+  labels:
     app: name-brainstormulator
 spec:
-  replicas: 1
+  replicas: 10
   selector:
     matchLabels:
       app: name-brainstormulator
