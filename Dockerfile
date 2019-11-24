@@ -1,4 +1,2 @@
-FROM nginx:latest
-
-ADD /nginx.conf /etc/nginx/conf.d/default.conf
-ADD /app /usr/share/nginx/html
+FROM nginx:1.16
+COPY /app /usr/share/nginx/html
