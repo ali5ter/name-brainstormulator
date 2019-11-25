@@ -1,16 +1,34 @@
 'use strict';
 
 const express = require('express');
-const ip = require("ip");
+const os = require('os');
+const ifaces = os.networkInterfaces();
+let serverIp = '';
+
+Object.keys(ifaces).forEach(function (ifname) {
+  let alias = 0;
+  ifaces[ifname].forEach(function (iface) {
+    if ('IPv4' !== iface.family || iface.internal !== false) {
+      return;
+    }
+    if (alias >= 1) {
+      serverIp = serverIp +', '+ iface.address;
+    } else {
+      serverIp = iface.address;
+    }
+    ++alias;
+  });
+});
 
 const PORT = 80;
 const HOST = '0.0.0.0';
 
 const app = express();
+
 app.use(express.static('static'))
+
 app.get('/server-ip', (req, res) => {
-  let serverIp = ip.address();
-  console.log('Fetching servier-ip ('+ serverIp +')');
+  console.log('Fetching server-ip ('+ serverIp +')');
   res.send('Serving on '+ serverIp +'\n');
 });
 

@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: name-brainstormulator
-        image: ali5ter/name-brainstormulator:1.2
+        image: ali5ter/name-brainstormulator:1.3
         ports:
         - containerPort: 80
 ---
