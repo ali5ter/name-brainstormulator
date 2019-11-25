@@ -2,9 +2,9 @@ Name Brainstormulator
 =====================
 A very simple web app to flash up words in different sequences. Used as a simple test app for container and kubernetes deployment.
 
-<img src="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/app/images/screenshots/brainstormulator-00.png" width="32%"/>&nbsp;
-<img src="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/app/images/screenshots/brainstormulator-01.png" width="32%"/>&nbsp;
-<img src="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/app/images/screenshots/brainstormulator-02.png" width="32%"/>&nbsp;
+<img src="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/screenshots/brainstormulator-00.png" width="32%"/>&nbsp;
+<img src="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/screenshots/brainstormulator-01.png" width="32%"/>&nbsp;
+<img src="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/screenshots/brainstormulator-02.png" width="32%"/>&nbsp;
 
 Running
 -------
