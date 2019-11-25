@@ -1,7 +1,13 @@
+# 
+# @file deployment.yaml
+# Deploy name-brainstormulator web app within a namespace access it with
+# a service
+#
+---
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: name-brainstormulator
+  name: nb
   labels:
     name: name-brainstormulator
 ---
@@ -9,11 +15,11 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: name-brainstormulator
-  namespace: name-brainstormulator
+  namespace: nb
   labels:
     app: name-brainstormulator
 spec:
-  replicas: 10
+  replicas: 1
   selector:
     matchLabels:
       app: name-brainstormulator
@@ -24,14 +30,15 @@ spec:
     spec:
       containers:
       - name: name-brainstormulator
-        image: ali5ter/name-brainstormulator:1.0
+        image: ali5ter/name-brainstormulator:1.2
         ports:
-        - containerPort: 8080
+        - containerPort: 80
 ---
 kind: Service
 apiVersion: v1
 metadata:
   name: name-brainstormulator
+  namespace: nb
 spec:
   selector:
     app: name-brainstormulator
@@ -39,4 +46,4 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 8080
+    targetPort: 80

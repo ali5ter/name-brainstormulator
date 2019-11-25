@@ -9,17 +9,17 @@ A very simple web app to flash up words in different sequences. Used as a simple
 Running
 -------
 After cloning this repo, you can run locally as a container like this:
-1. Build the docker image: <pre>docker build -t ali5ter/name-brainstormulator:1.2 .</pre>
-2. Run the container: <pre>docker run -d -p8080:80 ali5ter/name-brainstormulator:1.2</pre>
+1. Build the docker image: <pre>docker build -t ali5ter/name-brainstormulator:1.3 .</pre>
+2. Run the container: <pre>docker run -d -p8080:80 ali5ter/name-brainstormulator:1.3</pre>
 3. Open http://localhost:8080/ and play with the app
 4. Stop and remove the container: <pre>docker rm -f $(docker ps -l -q)</pre>
 
 Deploy this on Kubernetes like this:
-1. Build the docker image: <pre>docker build -t ali5ter/name-brainstormulator:1.2 .</pre>
-2. Push the image to a container registry. e.g deploying to Docker Hub: <pre>docker push ali5ter/name-brainstormulator:1.2</pre>
+1. Build the docker image: <pre>docker build -t ali5ter/name-brainstormulator:1.3 .</pre>
+2. Push the image to a container registry. e.g deploying to Docker Hub: <pre>docker push ali5ter/name-brainstormulator:1.3</pre>
 3. Deploy on K8s: <pre>kubectl apply -f deployment.yaml</pre>
 4. Open the external address presented by the service to view the app: <pre>kubectl get svc -n nb name-brainstormulator</pre>
-5. If you're using minikube run `minikube tunnel` in a separate terminal, then open the app using <pre>open "http://$(minikube ip):$(kubectl get svc -n nb name-brainstormulator -o jsonpath='{.spec.ports[0].nodePort}')"</pre>
+5. If you're using minikube run <pre>open "http://$(minikube ip):$(kubectl get svc -n nb name-brainstormulator -o jsonpath='{.spec.ports[0].nodePort}')"</pre>
 5. Play with scaling the deployment: <pre>kubectl scale deployments/name-brainstormulator -n nb --replicas=110</pre>
 6. Remove the deployment: <pre>kubectl delete namespace/nb</pre>
 

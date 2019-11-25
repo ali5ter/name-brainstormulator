@@ -136,6 +136,12 @@ body { background-color: #262626; color: #646464; }
     font-family: Economica;
 }
 
+#server {
+    position: absolute;
+    top: 0;
+    font-size: small;
+}
+
 #words {
     position: absolute;
     top: 0;

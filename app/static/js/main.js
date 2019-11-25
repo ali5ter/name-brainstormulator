@@ -76,6 +76,22 @@ var words = [],
         });
     },
 
+    // Display the ip of the server
+    setServerIP = function() {
+        console.log('Fetch server ip');
+        fetch('/server-ip')
+            .then(function(response) {
+                response.text().then(function (text) {
+                    console.log(text);
+                    $('#server').text(text);
+                });
+            })
+            .catch(function(response) {
+                console.log('Unable to fetch host ip');
+                $('#server').text('');
+            })
+    }
+
     // Add a word to the word list on-screen
     appendWord = function(word) {
         $('#words').append('<p><i class="icon-remove-sign pull-left icon-muted"></i>'+ word +'</p>');
@@ -214,6 +230,7 @@ $(function() {
     $(document).keyup(keyupHandler);
     $('#words').delegate('p', 'click', function() { removeWord($(this)); });
 
+    setServerIP();
     setPhrase();
     startPhrase();
 });
