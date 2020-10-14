@@ -19,7 +19,7 @@ metadata:
   labels:
     app: name-brainstormulator
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: name-brainstormulator
@@ -37,13 +37,15 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
+  # labels:
+  #   app: name-brainstormulator
   name: name-brainstormulator
   namespace: nb
 spec:
+  # type: ClusterIP
+  # sessionAffinity: None
   selector:
     app: name-brainstormulator
-  type: LoadBalancer
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
+    - port: 8080
+      targetPort: 80
