@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# @file start_kind_cluster
+# @author Alister Lewis-Bowen <alister@lewis-bowen.org>
+
+kind create cluster --config kind-config.yaml --name alb-local-test
+kustomize build base | kubectl apply -f -
+# kustomize build base | kubectl delete -f -
+
+# kustomize build overlays/production | kubectl apply -f -
+# kustomize build overlays/production | kubectl delete -f -
+
+# @ref https://kind.sigs.k8s.io/docs/user/ingress/#contour
+# kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
+# kubectl patch daemonsets -n projectcontour envoy -p '{"spec":{"template":{"spec":{"nodeSelector":{"ingress-ready":"true"},"tolerations":[{"key":"node-role.kubernetes.io/master","operator":"Equal","effect":"NoSchedule"}]}}}}'
