@@ -27,6 +27,11 @@ const app = express();
 
 app.use(express.static('static'))
 
+app.get('/ready', (req, res) => {
+  console.log('Report server is running');
+  res.send('running\n');
+});
+
 app.get('/server-ip', (req, res) => {
   console.log('Fetching server-ip ('+ serverIp +')');
   res.send('Serving on '+ serverIp +'\n');
