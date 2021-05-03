@@ -14,7 +14,6 @@ spec:
     metadata:
       labels:
         app: name-brainstormulator
-        app.kubernetes.io/part-of: alb-development-apps
     spec:
       containers:
       - name: name-brainstormulator
