@@ -34,11 +34,11 @@ spec:
         ports:
         - containerPort: 80
         readinessProbe:
-          httpGet:
-            path: /ready
-            port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 5
+          # httpGet:
+          #   path: /ready
+          #   port: 80
+          # initialDelaySeconds: 5
+          # periodSeconds: 5
 ---
 kind: Service
 apiVersion: v1
