@@ -10,8 +10,8 @@ Running
 -------
 After cloning this repo, you can run locally as a container like this:
 1. Build the docker image: <pre>docker build -t ali5ter/name-brainstormulator:1.3 .</pre>
-2. Run the container: <pre>docker run -d -p8080:80 ali5ter/name-brainstormulator:1.3</pre>
-3. Open http://localhost:8080/ and play with the app
+2. Run the container: <pre>docker run -d -p80:8080 ali5ter/name-brainstormulator:1.3</pre>
+3. Open http://localhost/ and play with the app
 4. Stop and remove the container: <pre>docker rm -f $(docker ps -lq)</pre>
 
 Deploy this on Kubernetes using minikube like this:
@@ -22,7 +22,7 @@ Deploy this on Kubernetes using minikube like this:
 5. Play with scaling the deployment: <pre>kubectl scale deployments/name-brainstormulator -n nb --replicas=110</pre>
 6. Remove the deployment: <pre>kubectl delete namespace/nb</pre>
 
-Deploy this on Kubernetes using a kind cluster? Check out the scripe named <pre>start_kind_cluster</pre>
+Deploy this on Kubernetes using a kind cluster? Check out the script named <pre>start_kind_cluster</pre>
 
 Usage
 -----

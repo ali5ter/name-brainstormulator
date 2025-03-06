@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 # @file start_kind_cluster
 # @author Alister Lewis-Bowen <alister@lewis-bowen.org>
+# Prereqs:
+# kind is installed (brew install kind)
+# cloud-provider-kind is installed (brew install cloud-provider-kind)
 
-# Assumes kind is installed (brew install kind)
-# Assumes cloud-provider-kind is installed (brew install cloud-provider-kind)
-
+# Create the kind cluster
 kind create cluster --config kind-config.yaml
 
 # Start the cloud-provider-kind in a separate terminal
-# sudo cloud-provider-kind
+sudo cloud-provider-kind &
 
-kubctl apply -f ./deployment_kind.yaml
+# Deploy the app
+kubectl apply -f deployment-kind.yaml
 
-# Find the external IP to connect to
-
-kubectl get services -A
+# Find the external IP to use in a URL to access the app
+kubectl get services -n nb
