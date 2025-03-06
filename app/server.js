@@ -21,8 +21,6 @@ Object.keys(ifaces).forEach(function (ifname) {
 });
 
 const PORT = 8080;
-const HOST = '0.0.0.0';
-
 const app = express();
 
 app.use(express.static('static'))
@@ -37,5 +35,6 @@ app.get('/server-ip', (req, res) => {
   res.send('Serving on '+ serverIp +'\n');
 });
 
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+app.listen(PORT, function () {
+  console.log(`Running on port ${PORT}`)
+})
