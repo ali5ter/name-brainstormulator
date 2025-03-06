@@ -27,7 +27,7 @@ app.use(express.static('static'))
 
 app.get('/ready', (req, res) => {
   console.log('Report server is running');
-  res.send('running\n');
+  res.send('Running\n');
 });
 
 app.get('/server-ip', (req, res) => {
@@ -36,5 +36,5 @@ app.get('/server-ip', (req, res) => {
 });
 
 app.listen(PORT, function () {
-  console.log(`Running on port ${PORT}`)
+  console.log('Running on server '+ serverIp +' behind port '+ PORT)
 })
