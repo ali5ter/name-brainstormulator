@@ -2,13 +2,16 @@
 # @file start_kind_cluster
 # @author Alister Lewis-Bowen <alister@lewis-bowen.org>
 
-kind create cluster --config kind-config.yaml --name alb-local-test
-kustomize build base | kubectl apply -f -
-# kustomize build base | kubectl delete -f -
+# Assumes kind is installed (brew install kind)
+# Assumes cloud-provider-kind is installed (brew install cloud-provider-kind)
 
-# kustomize build overlays/production | kubectl apply -f -
-# kustomize build overlays/production | kubectl delete -f -
+kind create cluster --config kind-config.yaml
 
-# @ref https://kind.sigs.k8s.io/docs/user/ingress/#contour
-# kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
-# kubectl patch daemonsets -n projectcontour envoy -p '{"spec":{"template":{"spec":{"nodeSelector":{"ingress-ready":"true"},"tolerations":[{"key":"node-role.kubernetes.io/master","operator":"Equal","effect":"NoSchedule"}]}}}}'
+# Start the cloud-provider-kind in a separate terminal
+# sudo cloud-provider-kind
+
+kubctl apply -f ./deployment_kind.yaml
+
+# Find the external IP to connect to
+
+kubectl get services -A

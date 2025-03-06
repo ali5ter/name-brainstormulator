@@ -14,12 +14,15 @@ After cloning this repo, you can run locally as a container like this:
 3. Open http://localhost:8080/ and play with the app
 4. Stop and remove the container: <pre>docker rm -f $(docker ps -lq)</pre>
 
-Deploy this on Kubernetes like this:
-1. Deploy on K8s: <pre>kubectl apply -f deployment.yaml</pre>
-2. Open the external address presented by the service to view the app: <pre>kubectl get svc -n nb name-brainstormulator</pre>
-3. If you're using minikube run <pre>open "http://$(minikube ip):$(kubectl get svc -n nb name-brainstormulator -o jsonpath='{.spec.ports[0].nodePort}')"</pre>
-4. Play with scaling the deployment: <pre>kubectl scale deployments/name-brainstormulator -n nb --replicas=110</pre>
-5. Remove the deployment: <pre>kubectl delete namespace/nb</pre>
+Deploy this on Kubernetes using minikube like this:
+1. Assumes you already have a minikube cluster running
+2. Deploy on K8s: <pre>kubectl apply -f deployment.yaml</pre>
+3. Open the external address presented by the service to view the app: <pre>kubectl get svc -n nb name-brainstormulator</pre>
+4. If you're using minikube run <pre>open "http://$(minikube ip):$(kubectl get svc -n nb name-brainstormulator -o jsonpath='{.spec.ports[0].nodePort}')"</pre>
+5. Play with scaling the deployment: <pre>kubectl scale deployments/name-brainstormulator -n nb --replicas=110</pre>
+6. Remove the deployment: <pre>kubectl delete namespace/nb</pre>
+
+Deploy this on Kubernetes using a kind cluster? Check out the scripe named <pre>start_kind_cluster</pre>
 
 Usage
 -----
