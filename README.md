@@ -24,7 +24,7 @@ Deploy this on a K8s cluster you have access to like this:
 
 If you're using 'minikube' k8s cluster, run <pre>open "http://$(minikube ip):$(kubectl get svc -n nb name-brainstormulator -o jsonpath='{.spec.ports[0].nodePort}')"</pre>
 
-If you're using a 'kind' K8s cluster, check out the script named <a href="https://raw.githubusercontent.com/ali5ter/name-brainstormulator/master/start_kind_cluster">start_kind_cluster</a>.
+If you're using a 'kind' K8s cluster, check out the script named <a href="https://github.com/ali5ter/name-brainstormulator/blob/master/start_kind_cluster">start_kind_cluster</a>.
 
 Running using Cloud Foundry
 ---------------------------
