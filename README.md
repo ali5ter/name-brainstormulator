@@ -1,3 +1,5 @@
+> **⚠️ Archived 2025-08-21. No longer maintained.**
+
 Name Brainstormulator
 =====================
 A very simple web app to flash up words in different sequences. Used as a simple test app for container and kubernetes deployment.
